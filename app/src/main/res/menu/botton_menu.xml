@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mis_pokemon"
+        android:icon="@drawable/pokeball"
+        android:title="@string/mis_pokemon" />
+    <item
+        android:id="@+id/pokedex"
+        android:icon="@drawable/pokemon_pika"
+        android:title="@string/pokedex" />
+    <item
+        android:id="@+id/ajustes"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/ajustes" />
+</menu>

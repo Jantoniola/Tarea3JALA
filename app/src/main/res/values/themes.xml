@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Tarea3JALA" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/amarillo</item>
+        <item name="colorSecondary">@color/rojo</item>
+        <item name="android:windowBackground">@color/amarilloClaro</item>
+    </style>
+
+    <style name="Theme.Tarea3JALA" parent="Base.Theme.Tarea3JALA" />
+
+
+</resources>

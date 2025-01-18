@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="es"
+        android:entries="@array/lenguaje"
+        android:entryValues="@array/codigolenguaje"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:key="idioma"
+        android:summary="@string/txt_setting"
+        android:title="@string/texto_lenguaje" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:key="eliminar"
+        android:summary="@string/sumario_eliminar"
+        android:title="@string/titulo_eliminar" />
+
+    <Preference
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:key="about"
+        android:summary="@string/sumario_about"
+        android:title="@string/titulo_about" />
+
+    <Preference
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:key="cerrar"
+        android:title="@string/titulo_cerrar"
+        android:summary="@string/sumario_cerrar"/>
+
+</PreferenceScreen>

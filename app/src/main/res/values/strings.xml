@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Capturar Pokemon</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="mis_pokemon">Mis Pokemon</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="txt_setting">Elige el idioma de la aplicación</string>
+    <string name="titulo_setting">Idioma de la Aplicación</string>
+    <string name="texto_lenguaje">Idioma</string>
+    <string name="sumario_eliminar">Permiso para poder eliminar Pokemon en Pokemon capturados</string>
+    <string name="titulo_eliminar">Eliminar Pokemon</string>
+    <string name="sumario_about">Información</string>
+    <string name="titulo_about">Acerca de</string>
+    <string name="titulo_cerrar">Cerrar sesión</string>
+    <string name="sumario_cerrar">Cerrar la sesión actual</string>
+    <string name="boton_aceptar">Aceptar</string>
+    <string name="dialog">Desarrollado por Juan Antonio López.\nVersion 1.0.0</string>
+    <string name="cerrarSesion">Cerrar Sesión usuario:</string>
+    <string name="mensajeCerrarSesion">¿Desea cerrar la sesión actual?</string>
+    <string name="toastCerrarSesion">Sesión cerrada correctamente.</string>
+    <string name="msgCapturadoOk">Pokemon capturado correctamente!!!</string>
+    <string name="msgCapturadoNoOk">Ha ocurrido un error y el Pokemon no ha sido capturado!!!</string>
+</resources>
