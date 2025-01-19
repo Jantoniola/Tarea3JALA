@@ -4,16 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vistas.MisPokemonFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvcapturados"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragmen mis pokemon" />
-    <Button
-        android:id="@+id/boton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:paddingBottom="@dimen/fui_button_inset_bottom"/>
 
 </FrameLayout>

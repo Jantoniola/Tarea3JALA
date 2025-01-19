@@ -17,5 +17,18 @@
         <item name="android:padding">5dp</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
+    <style name="ImagenCardCapturados">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
 
+    <style name="TituloCapturados">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/fuenrte_app</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/rojo</item>
+
+    </style>
 </resources>

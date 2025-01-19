@@ -57,7 +57,11 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+    //Dependencias de Firebase de autenticación
     implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
+
+    //Dependencias de Firestore
+    implementation("com.google.firebase:firebase-firestore")
 
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("androidx.recyclerview:recyclerview:1.1.0")
