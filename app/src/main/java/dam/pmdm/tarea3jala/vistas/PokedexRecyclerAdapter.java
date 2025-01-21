@@ -1,6 +1,5 @@
 package dam.pmdm.tarea3jala.vistas;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,26 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import dam.pmdm.tarea3jala.R;
 import dam.pmdm.tarea3jala.databinding.FichaPokemonPokedexBinding;
+import dam.pmdm.tarea3jala.datos.ViewModelCapturados;
 import dam.pmdm.tarea3jala.datos.ViewModelPokemon;
 import dam.pmdm.tarea3jala.modelos.Pokemon;
 
 public class PokedexRecyclerAdapter extends RecyclerView.Adapter<PokedexViewHolder> {
     private ArrayList<Pokemon> pokemons;
     private ViewModelPokemon viewModelPokemon;
+    private ViewModelCapturados viewModelCapturados;
 
     /**
      * Constructor de la clase
      *
-     * @param pokemons La lista de Pokemon
-     * @param viewModelPokemon  El ViewModel que usamos en el fragmento
+     * @param pokemons            La lista de Pokemon
+     * @param viewModelPokemon    El ViewModel que usamos en el fragmento
+     * @param viewModelCapturados
      */
-    public PokedexRecyclerAdapter(ArrayList<Pokemon> pokemons, ViewModelPokemon viewModelPokemon) {
+    public PokedexRecyclerAdapter(ArrayList<Pokemon> pokemons, ViewModelPokemon viewModelPokemon, ViewModelCapturados viewModelCapturados) {
         this.pokemons = pokemons;
         this.viewModelPokemon = viewModelPokemon;
+        this.viewModelCapturados=viewModelCapturados;
+
     }
 
     //Implementamos los métodos obligatorios
@@ -61,16 +63,17 @@ public class PokedexRecyclerAdapter extends RecyclerView.Adapter<PokedexViewHold
     @Override
     public void onBindViewHolder(@NonNull PokedexViewHolder holder, int position) {
         Pokemon pokemonActual = pokemons.get(position);
+
         //Llamamos al método de la clase ViewHolder, que habremos creado, que se encargará de darle valor al cardView y le enviamnos el objeto actual
 
         holder.pinta(pokemonActual);
-        holder.itemView.setOnClickListener(view->capturarPokemon(position,view));
+        holder.itemView.setOnClickListener(view->capturarPokemon(position,view,pokemonActual.getName()));
     }
 
-    private void capturarPokemon(int posicion,View view) {
+    private void capturarPokemon(int posicion,View view, String nombre) {
         // Aquí llamaremos al procedimiento donde meteremos el pokemon seleccionado en la base de datos, así como cambiaremos su aspecto
 
-        viewModelPokemon.capturarPokemon(view.getContext(), posicion);
+        viewModelCapturados.capturarPokemon(view.getContext(), nombre);
 
     }
 

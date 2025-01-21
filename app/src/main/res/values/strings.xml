@@ -20,7 +20,10 @@
     <string name="msgCapturadoOk">Pokemon capturado correctamente!!!</string>
     <string name="msgCapturadoNoOk">Ha ocurrido un error y el Pokemon no ha sido capturado!!!</string>
     <string name="TextoFijoPeso">Peso:</string>
-    <string name="TextoFijoAltura">Altura</string>
+    <string name="TextoFijoAltura">Altura:</string>
     <string name="TextoFijoTipos">Tipos:</string>
     <string name="DescripcionBoton_Borrar">Borrar Pokemon capturado</string>
+    <string name="NombreDetalles">Nombre:</string>
+    <string name="TextoBorrarPokemon">Borrar Pokemon</string>
+    <string name="tituloDetalle">Detalle</string>
 </resources>

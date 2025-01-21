@@ -20,8 +20,10 @@ import java.util.List;
 import dam.pmdm.tarea3jala.MainActivity;
 import dam.pmdm.tarea3jala.R;
 import dam.pmdm.tarea3jala.databinding.FragmentPokedexBinding;
+import dam.pmdm.tarea3jala.datos.ViewModelCapturados;
 import dam.pmdm.tarea3jala.datos.ViewModelPokemon;
 import dam.pmdm.tarea3jala.modelos.Pokemon;
+import dam.pmdm.tarea3jala.modelos.PokemonBD;
 
 
 public class PokedexFragment extends Fragment {
@@ -29,6 +31,8 @@ public class PokedexFragment extends Fragment {
     private FragmentPokedexBinding binding;
 
     private ViewModelPokemon viewModelPokemon;
+    private ViewModelCapturados viewModelCapturados;
+    ArrayList<PokemonBD> listaCapturados;
 
 
     @Override
@@ -37,13 +41,15 @@ public class PokedexFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentPokedexBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModelCapturados=new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
         viewModelPokemon = new ViewModelProvider(requireActivity()).get(ViewModelPokemon.class);
-        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon);
+        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon,viewModelCapturados);
         // Observamoas el LiveData
         viewModelPokemon.getDataList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pokemon>>() {
             @Override

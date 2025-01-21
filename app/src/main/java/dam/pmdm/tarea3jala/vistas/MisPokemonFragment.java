@@ -34,6 +34,7 @@ private FragmentMisPokemonBinding binding;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Aquí inicializa el viewModel
         viewModelCapturados = new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
         CapturadosRecyclerAdapter adaptador = new CapturadosRecyclerAdapter(new ArrayList<>(), viewModelCapturados);
         // Observamoas el LiveData

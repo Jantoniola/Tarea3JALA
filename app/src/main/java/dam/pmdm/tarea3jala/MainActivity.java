@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,7 +17,9 @@ import dam.pmdm.tarea3jala.api.ApiClient;
 import dam.pmdm.tarea3jala.api.ApiService;
 import dam.pmdm.tarea3jala.api.RespuestaLista;
 import dam.pmdm.tarea3jala.databinding.ActivityMainBinding;
+import dam.pmdm.tarea3jala.datos.ViewModelCapturados;
 import dam.pmdm.tarea3jala.modelos.Pokemon;
+import dam.pmdm.tarea3jala.modelos.PokemonBD;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +27,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavController navController;
-    public ArrayList<Pokemon> pokemons;
+    public boolean puedeBorrar=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         }
         binding.bottonNavigationView.setOnItemSelectedListener(this::onmenuselected);
         initializeAppBar();
-
-        cargaLista();
     }
 
 
@@ -73,20 +74,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onSupportNavigateUp() || navController.navigateUp();
     }
 
-    private void cargaLista() {
-//        ApiService apiService = ApiClient.getClient().create(ApiService.class);
-//        Call<RespuestaLista> call = apiService.obtenerListaPokemon();
-//        call.enqueue(new Callback<RespuestaLista>() {
-//            @Override
-//            public void onResponse(Call<RespuestaLista> call, Response<RespuestaLista> response) {
-//
-//                RespuestaLista respuestaLista = response.body();
-//                pokemons = respuestaLista.getResults();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RespuestaLista> call, Throwable t) {
-//            }
-//        });
-    }
+
 }

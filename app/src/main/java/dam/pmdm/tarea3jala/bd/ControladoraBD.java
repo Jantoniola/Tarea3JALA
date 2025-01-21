@@ -21,7 +21,8 @@ import dam.pmdm.tarea3jala.modelos.PokemonBD;
 
 public class ControladoraBD {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static StringBuilder cadena=new StringBuilder();
+    static StringBuilder cadena = new StringBuilder();
+
     public static Task<Boolean> guardarPokemonBD(PokemonBD pokemonBD, String emailUsuario) {
         TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
         db.collection("usuario").document(emailUsuario)
@@ -42,26 +43,45 @@ public class ControladoraBD {
         return taskCompletionSource.getTask();
     }
 
-public static void leerPokemonCapturados(String emailUsuario, Consumer<ArrayList<PokemonBD>> callback) {
-    ArrayList<PokemonBD> lista = new ArrayList<>();
+    public static void leerPokemonCapturados(String emailUsuario, Consumer<ArrayList<PokemonBD>> callback) {
+        ArrayList<PokemonBD> lista = new ArrayList<>();
 
-    db.collection("usuario")
-            .document(emailUsuario)
-            .collection("PokemonCapturados")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            lista.add(document.toObject(PokemonBD.class));
+        db.collection("usuario")
+                .document(emailUsuario)
+                .collection("PokemonCapturados")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                lista.add(document.toObject(PokemonBD.class));
+                            }
+                        } else {
+
                         }
-                    } else {
+                        callback.accept(lista); // Llama al callback con la lista, esté llena o vacía
+                    }
+                });
+    }
+
+    public static void borrarPokemon(String emailUsuario, String id) {
+        int identificador = Integer.parseInt(id);
+        db.collection("usuario").document(emailUsuario)
+                .collection("PokemonCapturados")
+                .document(id)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
 
                     }
-                    callback.accept(lista); // Llama al callback con la lista, esté llena o vacía
-                }
-            });
-}
+                });
 
+    }
 }
