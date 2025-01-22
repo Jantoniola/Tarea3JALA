@@ -33,10 +33,6 @@ public class ViewModelPokemon extends ViewModel {
     private MutableLiveData<ArrayList<Pokemon>> dataList;
 
     public ViewModelPokemon() {
-
-
-
-
         dataList = new MutableLiveData<>();
         //Aquí llamamos a la api y nos traemos la lista de pokemons. Lo metemos en dataList
 

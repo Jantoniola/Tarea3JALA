@@ -2,6 +2,8 @@ package dam.pmdm.tarea3jala.vistas;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,8 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +29,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Locale;
+
 import dam.pmdm.tarea3jala.LoginActivity;
 import dam.pmdm.tarea3jala.MainActivity;
 import dam.pmdm.tarea3jala.R;
@@ -33,6 +41,15 @@ public class AjustesFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.ajustes, rootKey);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        ListPreference listaidiomas = findPreference("idioma");
+        if (listaidiomas!=null){
+            listaidiomas.setOnPreferenceChangeListener((preference, newValue) -> {
+                // Cambio de idioma
+                return true;
+            });
+        }
+
 
         Preference about = findPreference("about");
         if (about != null) {
@@ -53,7 +70,7 @@ public class AjustesFragment extends PreferenceFragmentCompat {
 
         Preference logoutPreference = findPreference("cerrar");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        logoutPreference.setSummary(getText(R.string.cerrarSesion)+" "+user.getDisplayName());
+        logoutPreference.setSummary(getText(R.string.cerrarSesion) + " " + user.getDisplayName());
         if (logoutPreference != null) {
             logoutPreference.setOnPreferenceClickListener(preference -> {
                 new AlertDialog.Builder(getContext())
@@ -62,12 +79,12 @@ public class AjustesFragment extends PreferenceFragmentCompat {
                         .setMessage(R.string.mensajeCerrarSesion)
 
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        cerrarSesion();
-                                    }
-                                })
-                                        .setNegativeButton("No", null)
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                cerrarSesion();
+                            }
+                        })
+                        .setNegativeButton("No", null)
 
                         .show();
 

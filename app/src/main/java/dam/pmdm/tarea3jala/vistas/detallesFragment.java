@@ -1,13 +1,17 @@
 package dam.pmdm.tarea3jala.vistas;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,14 +61,43 @@ public class detallesFragment extends Fragment {
 
             viewModelCapturados=new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
              binding.botonBorrar.setOnClickListener(v -> eliminarPokemon(viewModelCapturados, getContext()));
+             // Verificamos si está activa la opción de borrar en la preferencias. En caso contrario, no aparecerá el botón.
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            boolean borrar=sharedPreferences.getBoolean("eliminar",false);
+            if (borrar){
+                binding.botonBorrar.setVisibility(View.VISIBLE);
+                binding.botonBorrar.setEnabled(true);
+            }else{
+                binding.botonBorrar.setVisibility(View.INVISIBLE);
+                binding.botonBorrar.setEnabled(false);
+                Toast.makeText(requireActivity(), "Para poder borrar el Pokemon, es necesario que se active la posibilidad desde la configuración", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
 
     private void eliminarPokemon(ViewModelCapturados viewModelCapturados, Context context) {
-        viewModelCapturados.eliminarPokemon(binding.IdDetalles.getText().toString());
-        Toast.makeText(requireActivity(), "El Pokemon " +binding.nombreDetalles.getText()+" ha sido borrado correctamente", Toast.LENGTH_SHORT).show();
-        getActivity().getSupportFragmentManager().popBackStack();
+
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Confirmación")
+                .setMessage("¿Deseas Eliminar el Pokemon "+binding.nombreDetalles.getText()+"?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        viewModelCapturados.eliminarPokemon(binding.IdDetalles.getText().toString());
+                        Toast.makeText(requireActivity(), "El Pokemon " +binding.nombreDetalles.getText()+" ha sido borrado correctamente", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Acción al seleccionar "No"
+                        dialog.dismiss();
+                    }
+                })
+                .show();
 
     }
     @Override

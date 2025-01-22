@@ -49,12 +49,17 @@ public class PokedexFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModelCapturados=new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
         viewModelPokemon = new ViewModelProvider(requireActivity()).get(ViewModelPokemon.class);
-        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon,viewModelCapturados);
-        // Observamoas el LiveData
-        viewModelPokemon.getDataList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pokemon>>() {
+
+
+
+     //   PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon,viewModelCapturados);
+        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(((MainActivity) getActivity()).listaPokedex, viewModelPokemon,viewModelCapturados);
+
+
+        viewModelCapturados.getDataList().observe(getViewLifecycleOwner(), new Observer<ArrayList<PokemonBD>>() {
             @Override
-            public void onChanged(ArrayList<Pokemon> pokemons) {
-                adaptador.updateData(pokemons);
+            public void onChanged(ArrayList<PokemonBD> pokemonsCapturados) {
+                adaptador.updateData(conbinaListas(pokemonsCapturados));
             }
         });
 
@@ -62,6 +67,25 @@ public class PokedexFragment extends Fragment {
         // binding.rvpokedex.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvpokedex.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.rvpokedex.setAdapter(adaptador);
+    }
+
+    private ArrayList<Pokemon> conbinaListas(ArrayList<PokemonBD> pokemonsCapturados) {
+        ArrayList<Pokemon> listaPokedex=((MainActivity) getActivity()).listaPokedex;
+        if (!pokemonsCapturados.isEmpty()){
+            for (Pokemon p:listaPokedex){
+                p.setCapturado(existeNombre(pokemonsCapturados,p.getName()));
+            }
+        }
+        return listaPokedex;
+    }
+
+    private boolean existeNombre(ArrayList<PokemonBD> pokemonsCapturados, String name) {
+        for (PokemonBD pDB:pokemonsCapturados){
+            if (pDB.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
