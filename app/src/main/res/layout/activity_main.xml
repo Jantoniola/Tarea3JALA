@@ -5,11 +5,51 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"    >
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="end">
+
+
+        <TextView
+            android:id="@+id/usuarioActivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/usuario_activo"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_marginEnd="15dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/active_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="nombre usuario"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="13sp" />
+</LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/amarilloClaro"
         app:navGraph="@navigation/nav_graph"
         app:defaultNavHost="true"

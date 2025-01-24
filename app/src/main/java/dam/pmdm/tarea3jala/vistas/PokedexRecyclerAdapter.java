@@ -13,24 +13,20 @@ import java.util.ArrayList;
 
 import dam.pmdm.tarea3jala.databinding.FichaPokemonPokedexBinding;
 import dam.pmdm.tarea3jala.datos.ViewModelCapturados;
-import dam.pmdm.tarea3jala.datos.ViewModelPokemon;
 import dam.pmdm.tarea3jala.modelos.Pokemon;
 
 public class PokedexRecyclerAdapter extends RecyclerView.Adapter<PokedexViewHolder> {
     private ArrayList<Pokemon> pokemons;
-    private ViewModelPokemon viewModelPokemon;
     private ViewModelCapturados viewModelCapturados;
 
     /**
      * Constructor de la clase
      *
      * @param pokemons            La lista de Pokemon
-     * @param viewModelPokemon    El ViewModel que usamos en el fragmento
      * @param viewModelCapturados
      */
-    public PokedexRecyclerAdapter(ArrayList<Pokemon> pokemons, ViewModelPokemon viewModelPokemon, ViewModelCapturados viewModelCapturados) {
+    public PokedexRecyclerAdapter(ArrayList<Pokemon> pokemons,  ViewModelCapturados viewModelCapturados) {
         this.pokemons = pokemons;
-        this.viewModelPokemon = viewModelPokemon;
         this.viewModelCapturados=viewModelCapturados;
 
     }
@@ -89,7 +85,7 @@ public class PokedexRecyclerAdapter extends RecyclerView.Adapter<PokedexViewHold
 
 class PokedexViewHolder extends RecyclerView.ViewHolder {
 private FichaPokemonPokedexBinding binding;
-    private final String URLIMAGEN="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+    private final String URLIMAGEN="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/";
     public PokedexViewHolder(FichaPokemonPokedexBinding binding) {
         super(binding.getRoot());
         this.binding=binding;

@@ -21,7 +21,6 @@ import dam.pmdm.tarea3jala.MainActivity;
 import dam.pmdm.tarea3jala.R;
 import dam.pmdm.tarea3jala.databinding.FragmentPokedexBinding;
 import dam.pmdm.tarea3jala.datos.ViewModelCapturados;
-import dam.pmdm.tarea3jala.datos.ViewModelPokemon;
 import dam.pmdm.tarea3jala.modelos.Pokemon;
 import dam.pmdm.tarea3jala.modelos.PokemonBD;
 
@@ -29,8 +28,6 @@ import dam.pmdm.tarea3jala.modelos.PokemonBD;
 public class PokedexFragment extends Fragment {
 
     private FragmentPokedexBinding binding;
-
-    private ViewModelPokemon viewModelPokemon;
     private ViewModelCapturados viewModelCapturados;
     ArrayList<PokemonBD> listaCapturados;
 
@@ -47,13 +44,11 @@ public class PokedexFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModelCapturados=new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
-        viewModelPokemon = new ViewModelProvider(requireActivity()).get(ViewModelPokemon.class);
+        viewModelCapturados = new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
 
 
-
-     //   PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon,viewModelCapturados);
-        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(((MainActivity) getActivity()).listaPokedex, viewModelPokemon,viewModelCapturados);
+        //   PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(new ArrayList<>(), viewModelPokemon,viewModelCapturados);
+        PokedexRecyclerAdapter adaptador = new PokedexRecyclerAdapter(((MainActivity) getActivity()).listaPokedex,  viewModelCapturados);
 
 
         viewModelCapturados.getDataList().observe(getViewLifecycleOwner(), new Observer<ArrayList<PokemonBD>>() {
@@ -70,18 +65,16 @@ public class PokedexFragment extends Fragment {
     }
 
     private ArrayList<Pokemon> conbinaListas(ArrayList<PokemonBD> pokemonsCapturados) {
-        ArrayList<Pokemon> listaPokedex=((MainActivity) getActivity()).listaPokedex;
-        if (!pokemonsCapturados.isEmpty()){
-            for (Pokemon p:listaPokedex){
-                p.setCapturado(existeNombre(pokemonsCapturados,p.getName()));
-            }
+        ArrayList<Pokemon> listaPokedex = ((MainActivity) getActivity()).listaPokedex;
+        for (Pokemon p : listaPokedex) {
+            p.setCapturado(existeNombre(pokemonsCapturados, p.getName()));
         }
         return listaPokedex;
     }
 
     private boolean existeNombre(ArrayList<PokemonBD> pokemonsCapturados, String name) {
-        for (PokemonBD pDB:pokemonsCapturados){
-            if (pDB.getName().equals(name)){
+        for (PokemonBD pDB : pokemonsCapturados) {
+            if (pDB.getName().equals(name)) {
                 return true;
             }
         }

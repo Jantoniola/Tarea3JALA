@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,7 +16,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import dam.pmdm.tarea3jala.api.ApiClient;
@@ -34,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     public ArrayList<Pokemon> listaPokedex;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
         obtenerListaPokedex();
         cargarPreferencias();
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -51,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
         }
         binding.bottonNavigationView.setOnItemSelectedListener(this::onmenuselected);
         initializeAppBar();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        binding.activeUser.setText(user.getDisplayName());
+        Toast.makeText(this, getString(R.string.ToastBienvenido)+user.getDisplayName(), Toast.LENGTH_SHORT).show();
     }
+
+
+
 
 
     private void initializeAppBar() {
@@ -111,7 +124,15 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        cambiarIdiomaMenu();
 
+    }
+
+    public void cambiarIdiomaMenu() {
+        binding.bottonNavigationView.getMenu().getItem(0).setTitle(R.string.mis_pokemon);
+        binding.bottonNavigationView.getMenu().getItem(1).setTitle(R.string.pokedex);
+        binding.bottonNavigationView.getMenu().getItem(2).setTitle(R.string.ajustes);
+        binding.usuarioActivo.setText(R.string.usuario_activo);
     }
 
 }

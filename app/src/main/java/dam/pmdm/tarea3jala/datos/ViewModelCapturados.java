@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dam.pmdm.tarea3jala.R;
 import dam.pmdm.tarea3jala.api.ApiClient;
@@ -28,10 +29,12 @@ import retrofit2.Response;
 
 public class ViewModelCapturados extends ViewModel {
     private MutableLiveData<ArrayList<PokemonBD>> dataListCapturados;
-    private final String URLIMAGEN = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+    private final String URLIMAGEN = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/";
+    private HashMap<String, String> tiposEsp;
 
     public ViewModelCapturados() {
         dataListCapturados = new MutableLiveData<>();
+        iniciarMapaTipos();
         //Aquí llamamos a la controladora de BD y almacenamos la lista de pokemon capturados
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ControladoraBD.leerPokemonCapturados(user.getEmail(), ListCapturados -> {
@@ -56,7 +59,7 @@ public class ViewModelCapturados extends ViewModel {
 
     public void capturarPokemon(Context context, String nombre) {
 
-        ArrayList<Pokemon> lista=new ArrayList<>();
+        ArrayList<Pokemon> lista = new ArrayList<>();
 
         ApiService service = ApiClient.getClient().create(ApiService.class);
         Call<PokemonCapturado> call = service.find(nombre);
@@ -93,7 +96,7 @@ public class ViewModelCapturados extends ViewModel {
                                     //lista.get(posicion).setCapturado(true);
                                     //dataList.setValue(lista);
 
-                                    ArrayList<PokemonBD>lista=dataListCapturados.getValue();
+                                    ArrayList<PokemonBD> lista = dataListCapturados.getValue();
                                     lista.add(pokemonBD);
                                     dataListCapturados.setValue(lista);
 
@@ -107,7 +110,7 @@ public class ViewModelCapturados extends ViewModel {
             }
 
             @Override
-            public void onFailure (Call < PokemonCapturado > call, Throwable t){
+            public void onFailure(Call<PokemonCapturado> call, Throwable t) {
             }
         });
 
@@ -119,11 +122,38 @@ public class ViewModelCapturados extends ViewModel {
         ArrayList<PokemonBD> lista = dataListCapturados.getValue();
         PokemonBD pokemonABorrar = obtenerPokemon(lista, id);
         if (lista != null) {
-            if (pokemonABorrar!=null) {
+            if (pokemonABorrar != null) {
                 lista.remove(pokemonABorrar);
                 dataListCapturados.setValue(lista);
             }
         }
     }
 
+    private void iniciarMapaTipos() {
+        tiposEsp = new HashMap<>();
+        tiposEsp.put("normal", "normal");
+        tiposEsp.put("fighting", "lucha");
+        tiposEsp.put("flying", "volador");
+        tiposEsp.put("poison", "veneno");
+        tiposEsp.put("ground", "tierra");
+        tiposEsp.put("rock", "roca");
+        tiposEsp.put("bug", "bicho");
+        tiposEsp.put("ghost", "fantasma");
+        tiposEsp.put("steel", "acero");
+        tiposEsp.put("fire", "fuego");
+        tiposEsp.put("water", "agua");
+        tiposEsp.put("grass", "planta");
+        tiposEsp.put("electric", "eléctrico");
+        tiposEsp.put("psychic", "psíquico");
+        tiposEsp.put("ice", "hielo");
+        tiposEsp.put("dragon", "dragón");
+        tiposEsp.put("dark", "siniestro");
+        tiposEsp.put("fairy", "hada");
+        tiposEsp.put("stellar", "estelar");
+        tiposEsp.put("unknown", "desconocido");
+    }
+
+    public String tipoTraducido(String tipo) {
+        return tiposEsp.get(tipo).toString();
+    }
 }

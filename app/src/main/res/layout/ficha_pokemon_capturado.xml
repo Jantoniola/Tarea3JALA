@@ -132,14 +132,5 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/botonBorrarPokemon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_weight="0.25"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/DescripcionBoton_Borrar"
-            android:src="@drawable/delete_pokemon" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

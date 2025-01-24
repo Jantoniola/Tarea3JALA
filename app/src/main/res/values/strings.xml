@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capturar Pokemon</string>
+    <string name="app_name">Captura Pokemons</string>
     <string name="pokedex">Pokedex</string>
     <string name="mis_pokemon">Mis Pokemon</string>
     <string name="ajustes">Ajustes</string>
@@ -26,4 +26,11 @@
     <string name="NombreDetalles">Nombre:</string>
     <string name="TextoBorrarPokemon">Borrar Pokemon</string>
     <string name="tituloDetalle">Detalle</string>
+    <string name="ToastPosibBorrado">Vaya a Ajustes si quiere activar el borrado</string>
+    <string name="ToastBienvenido">"Bienvenido "</string>
+    <string name="mensajeConfirmacionBorrado">"¿Deseas Eliminar el Pokemon "</string>
+    <string name="textoIdiomaActual">"El idioma actual es: "</string>
+    <string name="textoPartido">"El Pokemon "</string>
+    <string name="otroTextoPartido">" ha sido borrado correctamente"</string>
+    <string name="usuario_activo">Usuario Activo</string>
 </resources>

@@ -1,4 +1,5 @@
 package dam.pmdm.tarea3jala.vistas;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -34,9 +36,10 @@ private FragmentMisPokemonBinding binding;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         //Aquí inicializa el viewModel
         viewModelCapturados = new ViewModelProvider(requireActivity()).get(ViewModelCapturados.class);
-        CapturadosRecyclerAdapter adaptador = new CapturadosRecyclerAdapter(new ArrayList<>(), viewModelCapturados);
+        CapturadosRecyclerAdapter adaptador = new CapturadosRecyclerAdapter(new ArrayList<>(), viewModelCapturados,sharedPreferences.getString("idioma", "es"));
         // Observamoas el LiveData
         viewModelCapturados.getDataList().observe(getViewLifecycleOwner(), new Observer<ArrayList<PokemonBD>>() {
             @Override

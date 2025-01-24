@@ -70,7 +70,7 @@ public class detallesFragment extends Fragment {
             }else{
                 binding.botonBorrar.setVisibility(View.INVISIBLE);
                 binding.botonBorrar.setEnabled(false);
-                Toast.makeText(requireActivity(), "Para poder borrar el Pokemon, es necesario que se active la posibilidad desde la configuración", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), R.string.ToastPosibBorrado, Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -81,13 +81,14 @@ public class detallesFragment extends Fragment {
 
         new AlertDialog.Builder(getContext())
                 .setTitle("Confirmación")
-                .setMessage("¿Deseas Eliminar el Pokemon "+binding.nombreDetalles.getText()+"?")
+                .setMessage(getString(R.string.mensajeConfirmacionBorrado)+binding.nombreDetalles.getText()+"?")
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         viewModelCapturados.eliminarPokemon(binding.IdDetalles.getText().toString());
-                        Toast.makeText(requireActivity(), "El Pokemon " +binding.nombreDetalles.getText()+" ha sido borrado correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), getString(R.string.textoPartido) +binding.nombreDetalles.getText()+getString(R.string.otroTextoPartido), Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().popBackStack();
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

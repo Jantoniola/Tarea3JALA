@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Tarea3JALA" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.Tarea3JALA" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/amarillo</item>
         <item name="colorSecondary">@color/rojo</item>
         <item name="android:windowBackground">@color/amarilloClaro</item>

@@ -10,17 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -37,21 +32,33 @@ import dam.pmdm.tarea3jala.R;
 
 public class AjustesFragment extends PreferenceFragmentCompat {
 
+    ListPreference listaidiomas;
+    SwitchPreferenceCompat borrar;
+    Preference about;
+    Preference logoutPreference;
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.ajustes, rootKey);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        ListPreference listaidiomas = findPreference("idioma");
-        if (listaidiomas!=null){
+        listaidiomas = findPreference("idioma");
+        listaidiomas.setSummary(getString(R.string.textoIdiomaActual) + (listaidiomas.getValue().equals("es") ? "Español" : "English"));
+        if (listaidiomas != null) {
             listaidiomas.setOnPreferenceChangeListener((preference, newValue) -> {
-                // Cambio de idioma
+                String lenguaje = (String) newValue;
+                Locale locale = new Locale(lenguaje);
+                Locale.setDefault(locale);
+
+                Configuration config = new Configuration();
+                config.setLocale(locale);
+                getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+                actualizaPantalla((String)newValue);
                 return true;
             });
+
         }
-
-
-        Preference about = findPreference("about");
+        borrar = findPreference("eliminar");
+        about = findPreference("about");
         if (about != null) {
             about.setOnPreferenceClickListener(preference -> {
                 new AlertDialog.Builder(getContext())
@@ -68,7 +75,7 @@ public class AjustesFragment extends PreferenceFragmentCompat {
             });
         }
 
-        Preference logoutPreference = findPreference("cerrar");
+        logoutPreference = findPreference("cerrar");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         logoutPreference.setSummary(getText(R.string.cerrarSesion) + " " + user.getDisplayName());
         if (logoutPreference != null) {
@@ -91,6 +98,20 @@ public class AjustesFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+    }
+
+    private void actualizaPantalla(String newValue) {
+        ((MainActivity) getActivity()).cambiarIdiomaMenu();
+        listaidiomas.setSummary(getString(R.string.textoIdiomaActual) + (newValue.equals("es") ? "Español" : "English"));
+        listaidiomas.setTitle(R.string.texto_lenguaje);
+        borrar.setTitle(R.string.titulo_eliminar);
+        borrar.setSummary(R.string.sumario_eliminar);
+        about.setTitle(R.string.titulo_about);
+        about.setSummary(R.string.sumario_about);
+        logoutPreference.setTitle(R.string.titulo_cerrar);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        logoutPreference.setSummary(getText(R.string.cerrarSesion) + " " + user.getDisplayName());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.ajustes);
 
 
     }
@@ -116,7 +137,6 @@ public class AjustesFragment extends PreferenceFragmentCompat {
     @Override
     public void onStart() {
         super.onStart();
-        // El ToolBar tiene el título del Fragment. Vamos a cambiarlo
         if (getActivity() != null) {
 
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.ajustes);
