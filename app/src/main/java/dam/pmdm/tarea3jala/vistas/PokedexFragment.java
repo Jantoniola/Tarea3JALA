@@ -58,8 +58,6 @@ public class PokedexFragment extends Fragment {
             }
         });
 
-
-        // binding.rvpokedex.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvpokedex.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.rvpokedex.setAdapter(adaptador);
     }

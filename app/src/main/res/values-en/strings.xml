@@ -26,11 +26,12 @@
     <string name="NombreDetalles">Name:</string>
     <string name="TextoBorrarPokemon">Delete Pokemon</string>
     <string name="tituloDetalle">Detail</string>
-    <string name="ToastPosibBorrado">Go to Settings if you want to enable deletion</string>
+    <string name="ToastPosibBorrado">Go to Settings if you want to activate the deletion</string>
     <string name="ToastBienvenido">"Welcome "</string>
     <string name="mensajeConfirmacionBorrado">"Do you want to delete the Pokemon "</string>
     <string name="textoIdiomaActual">"The current language is: "</string>
     <string name="textoPartido">"The Pokemon "</string>
     <string name="otroTextoPartido">" has been deleted"</string>
     <string name="usuario_activo">active user</string>
+    <string name="confirmacion">Confirmation</string>
 </resources>

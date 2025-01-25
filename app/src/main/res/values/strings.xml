@@ -33,4 +33,5 @@
     <string name="textoPartido">"El Pokemon "</string>
     <string name="otroTextoPartido">" ha sido borrado correctamente"</string>
     <string name="usuario_activo">Usuario Activo</string>
+    <string name="confirmacion">Confirmación</string>
 </resources>

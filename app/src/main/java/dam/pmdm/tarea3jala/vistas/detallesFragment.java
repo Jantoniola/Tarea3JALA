@@ -80,7 +80,7 @@ public class detallesFragment extends Fragment {
 
 
         new AlertDialog.Builder(getContext())
-                .setTitle("Confirmación")
+                .setTitle(R.string.confirmacion)
                 .setMessage(getString(R.string.mensajeConfirmacionBorrado)+binding.nombreDetalles.getText()+"?")
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
