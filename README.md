@@ -62,8 +62,18 @@ También, y más importante creo, me he dado cuenta de la importancia de los cic
 
 ## Capturas de pantalla
 
+Pantalla de Login.
 
+![captura_login](https://github.com/user-attachments/assets/2f8aaa7f-61d6-418c-bba3-dbc2df20286e)
 
+Pantalla de Pokemons capturados.
 
+![captura_misPokemons](https://github.com/user-attachments/assets/d40b0938-50ee-46d7-bf39-f5d980c7deab)
 
+Pantalla Pokedex.
 
+![captura_pokedex](https://github.com/user-attachments/assets/3b343df2-ab12-4031-a3d3-35555b16a321)
+
+Pantalla de Ajustes.
+
+![captura_setting](https://github.com/user-attachments/assets/fcc48fbc-b1c1-4070-9579-315434fba6b9)
